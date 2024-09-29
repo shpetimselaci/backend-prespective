@@ -31,5 +31,6 @@
   },
   "engines": {
     "node": "v18"
-  }
+  },
+  "engineStrict": true
 }
