@@ -1,7 +1,19 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, it, beforeAll } from '@jest/globals';
+import { setupTestApp } from './setup';
+import request from 'supertest';
 
-describe('your code', () => {
-    test('it passes the tests', () => {
-        expect(true).toEqual(true);
+let setup: Awaited<ReturnType<typeof setupTestApp>>;
+
+beforeAll(async () => {
+    setup = await setupTestApp();
+});
+
+describe('app', () => {
+    it('responds with a not found', (done) => {
+        request(setup.app)
+            .get('/some-unknown-route')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(404, done);
     });
 });
