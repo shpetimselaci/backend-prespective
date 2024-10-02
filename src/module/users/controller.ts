@@ -19,8 +19,9 @@ export const getUsers = async (req: Request, res: Response, next: NextFunction) 
         const limit = Number(req.query.limit) || 10;
         const page = Number(req.query.page) || 1;
         const offset = (page - 1) * limit;
+        const sorting = req.query.created as  'asc' | 'desc';
 
-        const users = await userService.getUsers(limit, offset);
+        const users = await userService.getUsers(limit, offset, sorting);
         res.json(users);
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error' });

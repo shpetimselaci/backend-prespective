@@ -78,10 +78,12 @@ describe('User Controller', () => {
             email: 'jane@example.com',
         });
 
-        const response = await request(setup.app).get('//v1/users');
+        const response = await request(setup.app).get('//v1/users?created=desc');
 
         expect(response.status).toBe(200);
         expect(response.body).toHaveLength(2);
+
+        console.warn(response.body)
     });
 
     it('should return 500 if internal server error occurs while getting users', async () => {
