@@ -6,7 +6,7 @@ export const CreateUserBodySchema = z.object({
 });
 
 export const GetUsersQuerySchema = z.object({
-    limit: z.number().multipleOf(5).max(100).default(10),
-    page: z.number().min(0).default(0),
+    limit: z.coerce.number().multipleOf(5).max(100).default(10),
+    page: z.coerce.number().min(0).default(0),
 });
 export type CreateUser = z.infer<typeof CreateUserBodySchema>;
