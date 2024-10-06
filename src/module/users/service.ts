@@ -24,8 +24,8 @@ export const createUser = async (user: Omit<IUser, 'created_at' | 'updated_at'>)
 
 export const getUsers = async (limit: number, offset: number, sort: 'asc' | 'desc') => {
     try {
-        const sorting = sort === 'asc' ? -1 : 1;
-        return await User.find().limit(limit).skip(offset).sort({ createdAt: sort });
+        const sorting = sort === 'asc' ? 1 : -1;
+        return await User.find().limit(limit).skip(offset).sort({ createdAt: sorting });
     } catch (error) {
         logger.error(error);
         throw error;
